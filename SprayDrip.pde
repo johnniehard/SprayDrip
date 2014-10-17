@@ -7,7 +7,8 @@ ArrayList<Drip> drips;
 
 float radius;
 PVector loc;
-float size = 20;
+float size;
+float maxSize;
 color c = color(200, 0, 0, 50);
 
 void setup() {
@@ -20,6 +21,7 @@ void setup() {
 
   loc = new PVector(width/2, height/2);
   radius = (height*0.6)/2;
+  maxSize = radius * 0.15;
 }
 
 void draw() {
@@ -34,8 +36,8 @@ void draw() {
     noStroke();
 
     float distOrigin = PVector.dist(loc, pos);
-    size = map(distOrigin, 0, radius, 20, 1);
-    size = constrain(size, 1, 20);
+    size = map(distOrigin, 0, radius, maxSize, 1);
+    size = constrain(size, 1, maxSize);
 
     ellipse(0, 0, size, size);
     popMatrix();
@@ -43,8 +45,9 @@ void draw() {
 
   //add drips
   float r = random(1);
-  if(r < 0.01){
-    drips.add(new Drip(getGaussian(), c));
+  if(r < 0.02){
+    PVector dripLoc = getGaussian();
+    drips.add(new Drip(new PVector(dripLoc.x, loc.y), color(0, 200,0)));
   }
 
   //run drips

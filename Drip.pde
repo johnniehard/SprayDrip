@@ -10,7 +10,7 @@ class Drip{
   this.loc = loc;
   speed = new PVector(0, random(0.75, 0.85));
   slowdown = new PVector(0, -0.0015);
-  size = random(10, 20);
+  size = random(radius*0.05, radius*0.15);
   this.c = c;
   isAlive = true;
  } 
