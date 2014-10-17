@@ -47,7 +47,7 @@ void draw() {
   float r = random(1);
   if(r < 0.02){
     PVector dripLoc = getGaussian();
-    drips.add(new Drip(new PVector(dripLoc.x, loc.y), color(0, 200,0)));
+    drips.add(new Drip(new PVector(dripLoc.x, loc.y), c));
   }
 
   //run drips
