@@ -16,11 +16,13 @@ void setup(){
   background(255);
   
   loc = new PVector(width/2, height/2);
-  radius = (height*0.6)/2;
+  radius = (height*0.1)/2;
 }
 
 void draw(){
-  for(int i = 0; i < 1000; i++){
+  if(mousePressed){
+  loc = new PVector(mouseX, mouseY);
+  for(int i = 0; i < 8; i++){
   float nGX = (float) generator.nextGaussian();
   float nGY = (float) generator.nextGaussian();
   
@@ -28,7 +30,7 @@ void draw(){
   float posX = loc.x + radius/4*nGX;
   float posY = loc.y + radius/4*nGY;
   translate(posX, posY);
-  fill(200, 0, 0, 150);
+  fill(200, 0, 0, 50);
   noStroke();
   
   float distOrigin = dist(loc.x, loc.y, posX, posY);
@@ -39,7 +41,8 @@ void draw(){
   popMatrix();
  
   }
-  noFill();
+  }
+  /*noFill();
   stroke(0);
-  ellipse(loc.x, loc.y, radius*2, radius*2);
+  ellipse(loc.x, loc.y, radius*2, radius*2);*/
 }
