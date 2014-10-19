@@ -1,5 +1,6 @@
 //maintains aspect ratio
 //set desired sketch ratio
+/*
 int ratioW = 4;
 int ratioH = 3;
 
@@ -23,8 +24,8 @@ void setMySize(float w, float h) {
  
     size(w, w*(ratioH/ratioW));
     if(w*(ratioH/ratioW) > h){
-      size(h*(ratioW/ratioH), h)
+      size(h*(ratioW/ratioH), h);
     }
 
 }
-
+*/
