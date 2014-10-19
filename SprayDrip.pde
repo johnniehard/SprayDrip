@@ -10,9 +10,10 @@ PVector loc;
 float strl;
 float maxStrl;
 color c = color(200, 0, 0, 50);
+PGraphics pg;
 
 void setup() {
-  size(500, 500);
+  setMySize(window.innerWidth, window.innerHeight);
   smooth();
   noStroke();
   background(255);
@@ -22,14 +23,17 @@ void setup() {
   loc = new PVector(width/2, height/2);
   radius = (height*0.6)/2;
   maxStrl = radius * 0.15;
+  
+  pg = createGraphics(width, height);
 }
 
 void draw() {
   //draw spray splatter
   if(frameCount < 500){
+    beginDraw();
   for (int i = 0; i < 100; i++) {
    
-
+    
     pushMatrix();
     PVector pos = new PVector(loc.x+random(-radius, radius), loc.y+random(-radius, radius));
     translate(pos.x, pos.y);
@@ -37,14 +41,14 @@ void draw() {
     noStroke();
 
     float distOrigin = PVector.dist(loc, pos);
-    strl = map(distOrigin, 0, radius, maxStrl, 0);
-    strl = constrain(strl, 0, maxStrl);
+    strl = map(distOrigin, 0, radius, maxStrl, -1);
+    strl = constrain(strl, -1, maxStrl);
     if(strl > 0){
-    ellipse(0, 0, strl, strl);
+   ellipse(0, 0, strl, strl);
     }
     popMatrix();
   }
-
+endDraw();
   //add drips
   float r = random(1);
   if(r < 0.02){
@@ -63,19 +67,8 @@ void draw() {
     }
   }
   
-  
-}
 
-/*
-PVector getGaussian(){
-  float nGX = (float) generator.nextGaussian();
-    float nGY = (float) generator.nextGaussian();
-    float posX = loc.x + radius/4*nGX;
-    float posY = loc.y + radius/4*nGY;
-    PVector gaussian = new PVector(posX, posY);
-    return gaussian;
 }
-*/
 
 class Drip{
   PVector loc;
@@ -104,16 +97,25 @@ class Drip{
  }
  
  void display(){
+   beginDraw();
    pushMatrix();
    translate(loc.x, loc.y);
    noStroke();
    fill(c);
    ellipse(0, 0, strl, strl);
    popMatrix();
+   endDraw();
  }
  
  void run(){
    update();
    display();
  }
+}
+
+void setMySize(float w, float h) {
+  
+ 
+    size(w, h);
+
 }
